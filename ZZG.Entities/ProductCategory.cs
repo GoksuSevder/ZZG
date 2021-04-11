@@ -9,6 +9,7 @@ namespace ZZG.Entities
         public int CategoryId { get; set; }
         public List<Category> Categories { get; set; }
         public int ProductId { get; set; }
-        public List<Product> products { get; set; }
+        public List<Product> Products { get; set; }
+
     }
 }
