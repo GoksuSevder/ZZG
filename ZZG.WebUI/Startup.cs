@@ -41,6 +41,7 @@ namespace ZZG.WebUI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                SeedDatabase.Seed();
             }
             else
             {
