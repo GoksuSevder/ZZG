@@ -1,8 +1,23 @@
-﻿
+﻿@model ZZG.WebUI.Models.ProducyListModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="row">
+    <div class="col-md-3">
+        <ul>
+            <li class=" list-group-item">Erkek </li>
+            <li class=" list-group-item">Kadın </li>
+            <li class=" list-group-item">Çocuk</li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <partial name="_slider" />
 
-<p>hello word</p>
+        @foreach (var item in Model.Products)
+        {
+            <p>@item.Name</p>
+        }
+    </div>
+</div>
+

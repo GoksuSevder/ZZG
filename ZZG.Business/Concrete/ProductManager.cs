@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZZG.Business.Abstract;
 using ZZG.DataAccess.Abstract;
@@ -26,17 +27,22 @@ namespace ZZG.Business.Concrete
 
         public List<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _productDal.GetAll().ToList();
         }
 
         public Product GetById(int id)
         {
-            throw new NotImplementedException();
+            return _productDal.GetById(id);
+        }
+
+        public List<Product> GetPopulerProducts()
+        {
+            return _productDal.GetAll(p => p.Price > 2000).ToList();
         }
 
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            _productDal.Update(entity);
         }
     }
 }
