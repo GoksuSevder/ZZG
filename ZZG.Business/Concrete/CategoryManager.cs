@@ -1,31 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZZG.Business.Abstract;
+using ZZG.DataAccess.Abstract;
 using ZZG.Entities;
 
 namespace ZZG.Business.Concrete
 {
     public class CategoryManager : ICategoryService
     {
+        ICategoryDal _categoryDal;
+        public CategoryManager(ICategoryDal categoryDal)
+        {
+            _categoryDal = categoryDal;
+        }
         public void Create(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Create(entity);
         }
 
         public void Delete(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Delete(entity);
         }
 
         public List<Category> GetAll()
         {
-            throw new NotImplementedException();
+            return _categoryDal.GetAll().ToList();
         }
 
         public void Update(Category entity)
         {
-            throw new NotImplementedException();
+            _categoryDal.Update(entity);
         }
     }
 }

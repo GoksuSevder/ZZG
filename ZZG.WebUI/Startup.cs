@@ -11,6 +11,7 @@ using ZZG.Business.Abstract;
 using ZZG.Business.Concrete;
 using ZZG.DataAccess.Abstract;
 using ZZG.DataAccess.Concrete.EfCore;
+using ZZG.WebUI.Middlewares;
 
 namespace ZZG.WebUI
 {
@@ -48,7 +49,7 @@ namespace ZZG.WebUI
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+            //app.CustomStaticFiles();
             app.UseRouting();
 
             app.UseAuthorization();
