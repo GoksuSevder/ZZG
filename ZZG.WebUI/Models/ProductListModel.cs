@@ -6,7 +6,7 @@ using ZZG.Entities;
 
 namespace ZZG.WebUI.Models
 {
-    public class ProducyListModel
+    public class ProductListModel
     {
         public List<Product> Products { get; set; }
     }
