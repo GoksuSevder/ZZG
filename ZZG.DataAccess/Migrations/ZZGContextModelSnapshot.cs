@@ -18,8 +18,6 @@ namespace ZZG.DataAccess.Migrations
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-          
-
             modelBuilder.Entity("ZZG.Entities.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -41,6 +39,9 @@ namespace ZZG.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -66,10 +67,39 @@ namespace ZZG.DataAccess.Migrations
 
                     b.HasKey("CategoryId", "ProductId");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("ProductCategory");
                 });
 
-           
+            modelBuilder.Entity("ZZG.Entities.ProductCategory", b =>
+                {
+                    b.HasOne("ZZG.Entities.Category", "Category")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZZG.Entities.Product", "Product")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ZZG.Entities.Category", b =>
+                {
+                    b.Navigation("ProductCategories");
+                });
+
+            modelBuilder.Entity("ZZG.Entities.Product", b =>
+                {
+                    b.Navigation("ProductCategories");
+                });
 #pragma warning restore 612, 618
         }
     }

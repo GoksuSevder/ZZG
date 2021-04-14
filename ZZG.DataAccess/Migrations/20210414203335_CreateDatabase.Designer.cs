@@ -9,7 +9,7 @@ using ZZG.DataAccess.Concrete.EfCore;
 namespace ZZG.DataAccess.Migrations
 {
     [DbContext(typeof(ZZGContext))]
-    [Migration("20210411180634_CreateDatabase")]
+    [Migration("20210414203335_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,42 +19,6 @@ namespace ZZG.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CategoryProductCategory", b =>
-                {
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductCategoriesCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductCategoriesProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriesId", "ProductCategoriesCategoryId", "ProductCategoriesProductId");
-
-                    b.HasIndex("ProductCategoriesCategoryId", "ProductCategoriesProductId");
-
-                    b.ToTable("CategoryProductCategory");
-                });
-
-            modelBuilder.Entity("ProductProductCategory", b =>
-                {
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductCategoriesCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductCategoriesProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductsId", "ProductCategoriesCategoryId", "ProductCategoriesProductId");
-
-                    b.HasIndex("ProductCategoriesCategoryId", "ProductCategoriesProductId");
-
-                    b.ToTable("ProductProductCategory");
-                });
 
             modelBuilder.Entity("ZZG.Entities.Category", b =>
                 {
@@ -77,6 +41,9 @@ namespace ZZG.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
@@ -102,37 +69,38 @@ namespace ZZG.DataAccess.Migrations
 
                     b.HasKey("CategoryId", "ProductId");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("ProductCategory");
                 });
 
-            modelBuilder.Entity("CategoryProductCategory", b =>
+            modelBuilder.Entity("ZZG.Entities.ProductCategory", b =>
                 {
-                    b.HasOne("ZZG.Entities.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
+                    b.HasOne("ZZG.Entities.Category", "Category")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ZZG.Entities.ProductCategory", null)
-                        .WithMany()
-                        .HasForeignKey("ProductCategoriesCategoryId", "ProductCategoriesProductId")
+                    b.HasOne("ZZG.Entities.Product", "Product")
+                        .WithMany("ProductCategories")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("ProductProductCategory", b =>
+            modelBuilder.Entity("ZZG.Entities.Category", b =>
                 {
-                    b.HasOne("ZZG.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ProductCategories");
+                });
 
-                    b.HasOne("ZZG.Entities.ProductCategory", null)
-                        .WithMany()
-                        .HasForeignKey("ProductCategoriesCategoryId", "ProductCategoriesProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            modelBuilder.Entity("ZZG.Entities.Product", b =>
+                {
+                    b.Navigation("ProductCategories");
                 });
 #pragma warning restore 612, 618
         }
