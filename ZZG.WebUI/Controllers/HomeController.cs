@@ -23,7 +23,7 @@ namespace ZZG.WebUI.Controllers
         public IActionResult Index()
         {
 
-            return View(new ProducyListModel()
+            return View(new ProductListModel()
             {
                 Products = _productService.GetAll()
 
