@@ -40,6 +40,11 @@ namespace ZZG.Business.Concrete
             return _productDal.GetAll(p => p.Price > 2000).ToList();
         }
 
+        public Product GetProductDetails(int id)
+        {
+            return _productDal.GetProductDetails(id);
+        }
+
         public void Update(Product entity)
         {
             _productDal.Update(entity);
