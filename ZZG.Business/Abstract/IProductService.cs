@@ -5,11 +5,13 @@ using ZZG.Entities;
 
 namespace ZZG.Business.Abstract
 {
-    public interface IProductService 
+    public interface IProductService
     {
         Product GetById(int id);
+        Product GetProductDetails(int id);
         List<Product> GetAll();
         List<Product> GetPopulerProducts();
+        List<Product> GetProductsByCategory(string category,int page,int pageSize);
         void Create(Product entity);
         void Delete(Product entity);
         void Update(Product entity);

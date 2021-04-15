@@ -22,18 +22,23 @@ namespace ZZG.WebUI.Controllers
             {
                 return NotFound();
             }
-            Product product = _productService.GetById((int)id);
-            if (product==null)
+            Product product = _productService.GetProductDetails((int)id);
+            if (product == null)
             {
                 return NotFound();
             }
-            return View(product);
+            return View(new ProductDetailsModel()
+            {
+                Product = product,
+                Categories = product.ProductCategories.Select(i => i.Category).ToList()
+            });
         }
-        public IActionResult List()
+        public IActionResult List(string category,int page=1)
         {
+            const int pageSize = 2;
             return View(new ProductListModel()
             {
-                Products = _productService.GetAll()
+                Products = _productService.GetProductsByCategory(category,page,pageSize)
             });
         }
     }

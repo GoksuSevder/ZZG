@@ -27,12 +27,14 @@ namespace ZZG.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IProductDal,ProductDal>();
-            services.AddScoped<IProductService,ProductManager>();
+            services.AddScoped<IProductDal, ProductDal>();
+            services.AddScoped<ICategoryDal, CategoryDal>();
+            services.AddScoped<IProductService, ProductManager>();
+            services.AddScoped<ICategoryService, CategoryManager>();
 
-           
+
             services.AddControllersWithViews();
-           
+
 
         }
 
@@ -55,11 +57,16 @@ namespace ZZG.WebUI
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+           {
+               endpoints.MapControllerRoute(
+               name: "products",
+               pattern: "products/{*category}",
+               defaults: new { controller = "Shop", action = "List" });
+               endpoints.MapControllerRoute(
+               name: "default",
+               pattern: "{controller}/{action}/{id?}",
+               defaults: new { controller = "Home", action = "Index" });
+           });
         }
     }
 }

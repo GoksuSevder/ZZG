@@ -9,7 +9,7 @@ using ZZG.DataAccess.Concrete.EfCore;
 namespace ZZG.DataAccess.Migrations
 {
     [DbContext(typeof(ZZGContext))]
-    [Migration("20210414203335_CreateDatabase")]
+    [Migration("20210414222443_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

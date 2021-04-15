@@ -7,6 +7,8 @@ namespace ZZG.DataAccess.Abstract
 {
     public interface IProductDal : IGenericRepository<Product>
     {
-        IEnumerable<Product> GetPopulerProducts { get; set; }
+        IEnumerable<Product> GetPopulerProducts();
+        List<Product> GetProductsByCategory(string category,int page,int pageSize);
+        Product GetProductDetails(int id);
     }
 }
