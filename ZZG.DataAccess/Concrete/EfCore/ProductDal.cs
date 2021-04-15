@@ -25,5 +25,21 @@ namespace ZZG.DataAccess.Concrete.EfCore
                     .FirstOrDefault();
             }
         }
+
+        List<Product> IProductDal.GetProductsByCategory(string category,int page,int pageSize)
+        {
+            using (var context = new ZZGContext())
+            {
+                var products = context.Products.AsQueryable();
+                if (!string.IsNullOrEmpty(category))
+                {
+                    products = products
+                        .Include(i => i.ProductCategories)
+                        .ThenInclude(i => i.Category)
+                        .Where(i => i.ProductCategories.Any(a => a.Category.Name.ToLower() == category.ToLower()));                        
+                }
+                return products.Skip((page-1)*pageSize).Take(pageSize).ToList();
+            }
+        }
     }
 }

@@ -33,11 +33,12 @@ namespace ZZG.WebUI.Controllers
                 Categories = product.ProductCategories.Select(i => i.Category).ToList()
             });
         }
-        public IActionResult List()
+        public IActionResult List(string category,int page=1)
         {
+            const int pageSize = 2;
             return View(new ProductListModel()
             {
-                Products = _productService.GetAll()
+                Products = _productService.GetProductsByCategory(category,page,pageSize)
             });
         }
     }

@@ -23,10 +23,10 @@ namespace ZZG.DataAccess.Concrete.EfCore
 
                 if (context.Products.Count() == 0)
                 {
-                    context.Products.AddRange(Products);                  
-                   
+                    context.Products.AddRange(Products);
+                    context.AddRange(ProductCategories);
                 }
-                context.AddRange(ProductCategories);
+              
 
                 context.SaveChanges();
             }
