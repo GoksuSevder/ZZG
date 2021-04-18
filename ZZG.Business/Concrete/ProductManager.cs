@@ -35,6 +35,11 @@ namespace ZZG.Business.Concrete
             return _productDal.GetById(id);
         }
 
+        public int GetCountByCategory(string category)
+        {
+            return _productDal.GetCountByCategory(category);
+        }
+
         public List<Product> GetPopulerProducts()
         {
             return _productDal.GetAll(p => p.Price > 2000).ToList();

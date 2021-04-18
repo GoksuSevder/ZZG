@@ -10,6 +10,22 @@ namespace ZZG.DataAccess.Concrete.EfCore
 {
     public class ProductDal : GenericRepository<Product, ZZGContext>, IProductDal
     {
+        public int GetCountByCategory(string category)
+        {
+            using (var context = new ZZGContext())
+            {
+                var products = context.Products.AsQueryable();
+                if (!string.IsNullOrEmpty(category))
+                {
+                    products = products
+                        .Include(i => i.ProductCategories)
+                        .ThenInclude(i => i.Category)
+                        .Where(i => i.ProductCategories.Any(a => a.Category.Name.ToLower() == category.ToLower()));
+                }
+                return products.Count();
+            }
+        }
+
         public IEnumerable<Product> GetPopulerProducts()
         {
             throw new NotImplementedException();
