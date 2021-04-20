@@ -59,13 +59,35 @@ namespace ZZG.WebUI
             app.UseEndpoints(endpoints =>
            {
                endpoints.MapControllerRoute(
+              name: "adminCategory",
+              pattern: "admin/categories",
+              defaults: new { controller = "Admin", action = "CategoryList" }
+             );
+               endpoints.MapControllerRoute(
+               name: "adminCategory",
+               pattern: "admin/categories/{*id}",
+               defaults: new { controller = "Admin", action = "EditCategory" }
+              );
+               endpoints.MapControllerRoute(
+               name: "adminProducts",
+               pattern: "admin/products",
+               defaults: new { controller = "Admin", action = "ProductList" }
+              );
+               endpoints.MapControllerRoute(
+               name: "adminProducts",
+               pattern: "admin/products/{*id}",
+               defaults: new { controller = "Admin", action = "EditProduct" }
+              );
+               endpoints.MapControllerRoute(
                name: "products",
                pattern: "products/{*category}",
-               defaults: new { controller = "Shop", action = "List" });
+               defaults: new { controller = "Shop", action = "List" }
+               );
                endpoints.MapControllerRoute(
                name: "default",
                pattern: "{controller}/{action}/{id?}",
-               defaults: new { controller = "Home", action = "Index" });
+               defaults: new { controller = "Home", action = "Index" }
+               );
            });
         }
     }

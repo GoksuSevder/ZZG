@@ -1,0 +1,60 @@
+﻿@model ProductModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Product</h1>
+
+<hr />
+<form asp-controller="Admin" asp-action="EditProduct" method="post">
+    <div class="row">
+        <div class="col-8">
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <div class="form-group row">
+                <label asp-for="Name" class="col-md-2 col-form-label">Name</label>
+                <div class="col-md-10">
+                    <input asp-for="Name" value="@Model.Name" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ImageUrl" class="col-md-2 col-form-label">Image Url</label>
+                <div class="col-md-10">
+                    <input asp-for="ImageUrl" value="@Model.ImageUrl" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Description" class="col-md-2 col-form-label">Description</label>
+                <div class="col-md-10">
+                    <textarea id="editor" asp-for="Description" class="form-control">@Model.Description</textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Price" class="col-md-2 col-form-label">Price</label>
+                <div class="col-md-10">
+                    <input asp-for="Price" value="@Model.Price" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-10 offset-2">
+                    <button class="btn btn-primary" type="submit">Edit Product</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-4">
+            @foreach (var item in (List<Category>)ViewBag.Categories)
+            {
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox"
+                           name="categoryIds"
+                           value="@item.Id"
+                           class="custom-control-input" 
+                           id="categpry@(item.Id)" 
+                           @(Model.SelectedCategories.Any(i=>i.Id==item.Id)?"checked":"")>
+                    <label class="custom-control-label" for="categpry@(item.Id)">@item.Name</label>
+                </div>
+            }
+
+        </div>
+    </div>
+</form>

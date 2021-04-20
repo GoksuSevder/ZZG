@@ -25,9 +25,24 @@ namespace ZZG.Business.Concrete
             _categoryDal.Delete(entity);
         }
 
+        public void DeleteFromCategory(int categoryId, int productId)
+        {
+            _categoryDal.DeleteFromCategory(categoryId, productId);
+        }
+
         public List<Category> GetAll()
         {
             return _categoryDal.GetAll().ToList();
+        }
+
+        public Category GetById(int Id)
+        {
+            return _categoryDal.GetById(Id);
+        }
+
+        public Category GetByIdWithProducts(int Id)
+        {
+            return _categoryDal.GetByIdWithProducts(Id);
         }
 
         public void Update(Category entity)

@@ -55,6 +55,16 @@ namespace ZZG.Business.Concrete
             return _productDal.GetProductsByCategory(category,page, pageSize);
         }
 
+        public Product GetProductWithCategories(int id)
+        {
+            return _productDal.GetProductWithCategories(id);
+        }
+
+        public void Update(Product entity, int[] categoryIds)
+        {
+            _productDal.Update(entity,categoryIds);
+        }
+
         public void Update(Product entity)
         {
             _productDal.Update(entity);

@@ -11,5 +11,7 @@ namespace ZZG.DataAccess.Abstract
         List<Product> GetProductsByCategory(string category,int page,int pageSize);
         Product GetProductDetails(int id);
         int GetCountByCategory(string category);
+        Product GetProductWithCategories(int id);
+        void Update(Product entity, int[] categoryIds);
     }
 }
