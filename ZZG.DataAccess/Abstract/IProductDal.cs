@@ -10,5 +10,8 @@ namespace ZZG.DataAccess.Abstract
         IEnumerable<Product> GetPopulerProducts();
         List<Product> GetProductsByCategory(string category,int page,int pageSize);
         Product GetProductDetails(int id);
+        int GetCountByCategory(string category);
+        Product GetProductWithCategories(int id);
+        void Update(Product entity, int[] categoryIds);
     }
 }
