@@ -2,7 +2,10 @@
 @{
     ViewData["Title"] = "EditCategory";
 }
-
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
 <h1>Edit Category</h1>
 <hr />
 
@@ -13,6 +16,7 @@
                 <label asp-for="Name" class="col-md-2 col-form-label">Name</label>
                 <div class="col-md-10">
                     <input asp-for="Name" value="@Model.Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
 

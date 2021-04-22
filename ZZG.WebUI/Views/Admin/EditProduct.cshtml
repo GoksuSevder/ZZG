@@ -2,7 +2,10 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
 <h1>Edit Product</h1>
 
 <hr />
@@ -14,24 +17,28 @@
                 <label asp-for="Name" class="col-md-2 col-form-label">Name</label>
                 <div class="col-md-10">
                     <input asp-for="Name" value="@Model.Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="ImageUrl" class="col-md-2 col-form-label">Image Url</label>
                 <div class="col-md-10">
                     <input asp-for="ImageUrl" value="@Model.ImageUrl" class="form-control" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="Description" class="col-md-2 col-form-label">Description</label>
                 <div class="col-md-10">
                     <textarea id="editor" asp-for="Description" class="form-control">@Model.Description</textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="Price" class="col-md-2 col-form-label">Price</label>
                 <div class="col-md-10">
                     <input asp-for="Price" value="@Model.Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
@@ -48,9 +55,9 @@
                     <input type="checkbox"
                            name="categoryIds"
                            value="@item.Id"
-                           class="custom-control-input" 
-                           id="categpry@(item.Id)" 
-                           @(Model.SelectedCategories.Any(i=>i.Id==item.Id)?"checked":"")>
+                           class="custom-control-input"
+                           id="categpry@(item.Id)"
+                           @(Model.SelectedCategories.Any(i => i.Id == item.Id) ? "checked" : "")>
                     <label class="custom-control-label" for="categpry@(item.Id)">@item.Name</label>
                 </div>
             }
